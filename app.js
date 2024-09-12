@@ -14,7 +14,8 @@ const colors = [
     "#7efff5",
 ]
 function onClick(event){
-    ctx.moveTo(0, 0);
+    ctx.beginPath();
+    ctx.moveTo(event.offsetX, event.offsetY);
     const color = colors[Math.floor(Math.random() * colors.length)];
     ctx.strokeStyle = color;
     ctx.lineTo(event.offsetX, event.offsetY);
