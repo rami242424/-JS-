@@ -1,3 +1,5 @@
+const eraserBtn = document.getElementById("eraser-btn");
+const destroyBtn = document.getElementById("destroy-btn");
 const modeBtn = document.getElementById("mode-btn");
 const colorOptions = Array.from(document.getElementsByClassName("color-option"));
 // const colorOptions = document.getElementsByClassName("color-option");
@@ -69,6 +71,17 @@ function onCanvasClick(){
     }
 }
 
+function onDestroyClick(){
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, 800, 800);
+}
+
+function onEraserClick(){
+    ctx.strokeStyle = "white";
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+}
+
 
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
@@ -90,3 +103,9 @@ colorOptions.forEach(color => color.addEventListener("click", onColorClick));
 
 // mode 바꾸는 버튼 감지
 modeBtn.addEventListener("click", onModeClick);
+
+// Destroy 완전히 초기화
+destroyBtn.addEventListener("click", onDestroyClick);
+
+// 지우개
+eraserBtn.addEventListener("click", onEraserClick);
