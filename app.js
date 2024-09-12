@@ -5,8 +5,8 @@ canvas.height = 800;
 
 ctx.lineWidth = 2;
 function onClick(event){
-    // console.log(event);
+    ctx.moveTo(0, 0);
     ctx.lineTo(event.offsetX, event.offsetY);
     ctx.stroke();
 }
-canvas.addEventListener("click", onClick);
+canvas.addEventListener("mousemove", onClick);
