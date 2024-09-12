@@ -1,3 +1,4 @@
+const modeBtn = document.getElementById("mode-btn");
 const colorOptions = Array.from(document.getElementsByClassName("color-option"));
 // const colorOptions = document.getElementsByClassName("color-option");
 const color = document.getElementById("color");
@@ -9,6 +10,7 @@ canvas.height = 800;
 ctx.lineWidth = lineWidth.value;
 
 let isPainting = false;
+let isFilling = false;
 
 function onMove(event){
     if (isPainting) {
@@ -50,6 +52,22 @@ function onColorClick(event){
     color.value = colorValue;
 }
 
+// 모드를 변경하는 함수
+function onModeClick(){
+    if(isFilling){
+        isFilling = false;
+        modeBtn.innerText = "Fill";
+    } else {
+        isFilling = true;
+        modeBtn.innerText = "Draw";
+    }
+}
+
+function onCanvasClick(){
+    if(isFilling){
+        ctx.fillRect(0, 0, 800, 800);
+    }
+}
 
 
 canvas.addEventListener("mousemove", onMove);
@@ -57,6 +75,9 @@ canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 // 그리면서 틀 밖으로 나갔다가 들어오면 클릭없이도 계속선이 그어지는 에러 해결코드
 canvas.addEventListener("mouseleave", cancelPainting);
+
+// 클릭시 화면 채우기
+canvas.addEventListener("click", onCanvasClick);
 
 // range가 변하는 것을 감지할 eventListener
 lineWidth.addEventListener("change", onLineWidthChange);
@@ -66,3 +87,6 @@ color.addEventListener("change", onColorChange);
 
 // 모든 각 컬러에 클릭하면 감지할 eventListener
 colorOptions.forEach(color => color.addEventListener("click", onColorClick));
+
+// mode 바꾸는 버튼 감지
+modeBtn.addEventListener("click", onModeClick);
