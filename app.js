@@ -1,3 +1,4 @@
+const color = document.getElementById("color");
 const lineWidth = document.getElementById("line-width");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -22,13 +23,19 @@ function startPainting(){
 }
 
 function cancelPainting(){
+    ctx.beginPath();
     isPainting = false;
 }
 
 function onLineWidthChange(event){
     // console.log(event.target.value);
-    ctx.beginPath();
     ctx.lineWidth = event.target.value;
+}
+
+function onColorChange(event){
+    // console.log(event.target.value);
+    ctx.strokeStyle = event.target.value;
+    ctx.fillStyle = event.target.value;
 }
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
@@ -38,3 +45,6 @@ canvas.addEventListener("mouseleave", cancelPainting);
 
 // range가 변하는 것을 감지할 eventListener
 lineWidth.addEventListener("change", onLineWidthChange);
+
+// color가 변하는 것을 감지할 eventListener
+color.addEventListener("change", onColorChange);
