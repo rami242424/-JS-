@@ -1,3 +1,5 @@
+const eraserBtn = document.getElementById("eraser-btn");
+const destroyBtn = document.getElementById("destroy-btn");
 const modeBtn = document.getElementById("mode-btn");
 const colorOptions = Array.from(document.getElementsByClassName("color-option"));
 // const colorOptions = document.getElementsByClassName("color-option");
@@ -62,6 +64,17 @@ function onCanvasClick(){
     }
 }
 
+function onDestroyClick(){
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, 800, 800);
+}
+
+function onEraserClick(){
+    ctx.fillStyle = "white";
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -81,3 +94,9 @@ modeBtn.addEventListener("click", onModeClick);
 
 // 클릭시 (fill) 화면 채우기
 canvas.addEventListener("click", onCanvasClick);
+
+//destroy 이벤트 리스너
+destroyBtn.addEventListener("click", onDestroyClick);
+
+// eraser 이벤트리스너
+eraserBtn.addEventListener("click", onEraserClick);
