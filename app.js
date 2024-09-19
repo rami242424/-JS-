@@ -1,3 +1,4 @@
+const textInput = document.getElementById("text");
 const fileInput = document.getElementById("file");
 const eraserBtn = document.getElementById("eraser-btn");
 const destroyBtn = document.getElementById("destroy-btn");
@@ -96,6 +97,19 @@ function onFileChange(event){
     }
 }
 
+function onDoubleClick(event){
+    ctx.save(); // ctx의 현재 상태, 색상, 스타일 등 모든 것을 저장
+    const text = textInput.value;
+    ctx.lineWidth = 1;
+    ctx.font = "68px serif";
+    // ctx.strokeText(text, event.offsetX, event.offsetY);
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    // console.log(event.offsetX, event.offsetY);
+    ctx.restore(); // 저장해뒀던 버전으로 되돌리기 -> save와 restore사이에서는 어떤 수정을 하던 저장되지 않는다.
+}
+
+// 입력한 텍스트 더블클릭 할 떄
+canvas.addEventListener("dblclick", onDoubleClick);
 
 // canvas.onmousemove = onMove; 아래 코드와 같다.
 canvas.addEventListener("mousemove", onMove);
