@@ -1,3 +1,4 @@
+const saveBtn = document.getElementById("save");
 const textInput = document.getElementById("text");
 const fileInput = document.getElementById("file");
 const eraserBtn = document.getElementById("eraser-btn");
@@ -121,6 +122,16 @@ function onDoubleClick(event){
 
 }
 
+// 캔버스 안에 있는 이미지 저장
+function onSaveClick(){
+    console.log(canvas.toDataURL()); // 그린 그림을 인코딩한 url
+    const url = canvas.toDataURL();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "myDrawing.png";
+    a.click();
+}
+
 // 입력한 텍스트 더블클릭 할 떄
 canvas.addEventListener("dblclick", onDoubleClick);
 
@@ -154,3 +165,6 @@ eraserBtn.addEventListener("click", onEraserClick);
 
 // 첨부파일
 fileInput.addEventListener("change", onFileChange);
+
+// save button
+saveBtn.addEventListener("click", onSaveClick);
