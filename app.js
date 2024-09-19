@@ -12,6 +12,8 @@ const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = "round";
+
 
 let isPainting = false;
 let isFilling = false;
@@ -98,14 +100,25 @@ function onFileChange(event){
 }
 
 function onDoubleClick(event){
-    ctx.save(); // ctx의 현재 상태, 색상, 스타일 등 모든 것을 저장
+    // ctx.save(); // ctx의 현재 상태, 색상, 스타일 등 모든 것을 저장
+    // const text = textInput.value;
+    // ctx.lineWidth = 1;
+    // ctx.font = "68px serif";
+    // // ctx.strokeText(text, event.offsetX, event.offsetY);
+    // ctx.fillText(text, event.offsetX, event.offsetY);
+    // // console.log(event.offsetX, event.offsetY);
+    // ctx.restore(); // 저장해뒀던 버전으로 되돌리기 -> save와 restore사이에서는 어떤 수정을 하던 저장되지 않는다.
+
+    // 아래 코드(text가 비어있다면 아무것도 하지 않게 만들기)
     const text = textInput.value;
-    ctx.lineWidth = 1;
-    ctx.font = "68px serif";
-    // ctx.strokeText(text, event.offsetX, event.offsetY);
-    ctx.fillText(text, event.offsetX, event.offsetY);
-    // console.log(event.offsetX, event.offsetY);
-    ctx.restore(); // 저장해뒀던 버전으로 되돌리기 -> save와 restore사이에서는 어떤 수정을 하던 저장되지 않는다.
+    if(text !== ""){
+        ctx.save();
+        ctx.lineWidth = 1;
+        ctx.font = "68px serif";
+        ctx.fillText(text, event.offsetX, event.offsetY);
+        ctx.restore();
+    }
+
 }
 
 // 입력한 텍스트 더블클릭 할 떄
